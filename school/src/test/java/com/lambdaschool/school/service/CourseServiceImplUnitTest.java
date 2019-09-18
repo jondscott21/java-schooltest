@@ -1,6 +1,9 @@
 package com.lambdaschool.school.service;
 
 import com.lambdaschool.school.SchoolApplication;
+import com.lambdaschool.school.model.Course;
+import com.lambdaschool.school.model.Instructor;
+import com.lambdaschool.school.repository.InstructorRepository;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -20,6 +23,7 @@ import static org.junit.Assert.*;
 public class CourseServiceImplUnitTest
 {
     @Autowired CourseService courseService;
+    @Autowired InstructorService instructorService;
 
     @Before
     public void setUp() throws Exception
@@ -46,6 +50,15 @@ public class CourseServiceImplUnitTest
     @Test
     public void getCountStudentsInCourse()
     {
+    }
+
+    @Test
+    public void save()
+    {
+        Instructor i1 = instructorService.findInstructorById(2);
+        Course c1 = new Course("Getting Mathy With it", i1);
+        courseService.save(c1);
+        assertEquals(7, courseService.findAll().size());
     }
 
     @Test
